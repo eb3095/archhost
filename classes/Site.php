@@ -156,6 +156,7 @@ class Site {
     $this->pool->format($this->name);
 
     exec("mkdir /users/".$this->user->getName()."/".$this->name);
+    exec("mkdir /users/".$this->user->getName()."/".$this->name."/tmp");
     $this->mount();
     exec("chown ".$this->user->getName().":".$this->user->getName()." /users/".$this->user->getName()."/".$this->name);
 
