@@ -32,6 +32,7 @@ class ArchHost {
   public function getUser($user) {
     $query['table'] = "users";
     $query['fields'][] = "*";
+    $query['where']['name'] = $user;
 
     $result = $this->mysql->read($query);
 

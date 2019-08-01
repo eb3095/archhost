@@ -89,7 +89,7 @@ class Site {
   }
 
   public function mount() {
-    exec("mount /dev/".$this->pool->getName()."/".$this->name." /users/".$this->user->getName()."/".$this->name);
+    exec("mount /dev/".$this->pool->getName()."/".$this->name." /users/".$this->user->getName()."/sites/".$this->name);
     exec("rm -rf /users/".$this->user->getName()."/".$this->name."/lost+found");
   }
 
@@ -155,10 +155,10 @@ class Site {
     $this->pool->create($this->name,$this->size);
     $this->pool->format($this->name);
 
-    exec("mkdir /users/".$this->user->getName()."/".$this->name);
-    exec("mkdir /users/".$this->user->getName()."/".$this->name."/tmp");
+    exec("mkdir /users/".$this->user->getName()."/sites/".$this->name);
+    exec("mkdir /users/".$this->user->getName()."/tmp");
     $this->mount();
-    exec("chown ".$this->user->getName().":".$this->user->getName()." /users/".$this->user->getName()."/".$this->name);
+    exec("chown ".$this->user->getName().":".$this->user->getName()." /users/".$this->user->getName()."/sites/".$this->name);
 
     $this->regenerateNginxConfig();
     $this->regeneratePHPFPMConfig();
@@ -244,7 +244,7 @@ class Site {
     $this->unmount();
 
     $this->pool->remove($this->name);
-    exec("rm -rf /users/".$this->user->getName()."/".$this->name);
+    exec("rm -rf /users/".$this->user->getName()."/sites/".$this->name);
     foreach ($this->domains as $domain) {
       $dom->delete();
     }

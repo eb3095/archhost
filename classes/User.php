@@ -55,12 +55,9 @@ class User {
 
   public function create() {
     exec("mkdir /users/".$this->name);
-    exec("mkdir /users/".$this->name."/bin");
-    exec("mkdir /users/".$this->name."/bin/sites");
-    exec("mkdir /users/".$this->name."/bin/logs");
-    exec("mkdir /users/".$this->name."/bin/tmp");
-    exec("ln -s /users/".$this->name."/bin/sites /users/".$this->name."/sites");
-    exec("ln -s /users/".$this->name."/bin/logs /users/".$this->name."/logs");
+    exec("mkdir /users/".$this->name."/sites");
+    exec("mkdir /users/".$this->name."/logs");
+    exec("mkdir /users/".$this->name."/tmp");
     exec("useradd -d /users/".$this->name." ".$this->name);
     exec("chown -R ".$this->name.":".$this->name." /users/".$this->name);
 
